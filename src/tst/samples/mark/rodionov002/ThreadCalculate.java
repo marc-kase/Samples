@@ -6,12 +6,13 @@ import static java.lang.Math.*;
  * Created by MM on 07.01.2016.
  */
 public class ThreadCalculate {
-    public double calculate(double start, double end, double step, int chunks) throws InterruptedException {
+    public double calculate(double start, double end, double step, int chunks,
+                            Function<Double, Double> func) throws InterruptedException {
         PartialCalcThread[] threads = new PartialCalcThread[chunks];
         double interval = (end - start) / chunks;
         double st = start;
         for (int i = 0; i < chunks; i++) {
-            threads[i] = new PartialCalcThread(st, st + interval, step, x -> (sin(x) * sin(x) + cos(x) * cos(x)));
+            threads[i] = new PartialCalcThread(st, st + interval, step, func);
             threads[i].start();
             st += interval;
         }
@@ -51,7 +52,7 @@ public class ThreadCalculate {
 
     public static void main(String[] args) throws InterruptedException {
         ThreadCalculate threadCalculate = new ThreadCalculate();
-        double res = threadCalculate.calculate(0, 1000, 0.1, 5);
+        double res = threadCalculate.calculate(0, 1000, 0.1, 2, x -> (sin(x) * sin(x) + cos(x) * cos(x)));
         System.out.println(res);
     }
 }

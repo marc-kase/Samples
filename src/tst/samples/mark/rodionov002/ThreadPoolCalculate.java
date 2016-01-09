@@ -7,8 +7,8 @@ import static java.lang.Math.*;
 /**
  * Created by MM on 07.01.2016.
  */
-public class PoolCalculate {
-    public double calculate(double start, double end, double step, int chunks) throws InterruptedException, ExecutionException {
+public class ThreadPoolCalculate {
+    public double calculate(double start, double end, double step, int chunks, Function<Double, Double> func) throws InterruptedException, ExecutionException {
         ExecutorService executorService = Executors.newFixedThreadPool(chunks);
         Future[] futures = new Future[chunks];
 
@@ -16,7 +16,7 @@ public class PoolCalculate {
         double st = start;
         for (int i = 0; i < chunks; i++) {
             futures[i] = executorService
-                    .submit(new CallableCalcThread(st, st + interval, step, x -> (sin(x) * sin(x) + cos(x) * cos(x))));
+                    .submit(new CallableCalcThread(st, st + interval, step, func));
             st += interval;
         }
         executorService.shutdownNow();
@@ -57,8 +57,8 @@ public class PoolCalculate {
 
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
-        PoolCalculate threadCalculate = new PoolCalculate();
-        double res = threadCalculate.calculate(0, 1000, 0.1, 5);
+        ThreadPoolCalculate threadCalculate = new ThreadPoolCalculate();
+        double res = threadCalculate.calculate(0, 1000, 0.1, 2, x -> (sin(x) * sin(x) + cos(x) * cos(x)));
         System.out.println(res);
     }
 }

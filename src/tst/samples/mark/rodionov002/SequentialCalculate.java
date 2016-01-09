@@ -23,6 +23,7 @@ public class SequentialCalculate {
 
     public static void main(String[] args) {
         SequentialCalculate calc = new SequentialCalculate(x -> (sin(x) * sin(x) + cos(x) * cos(x)));
-        calc.calculate(0, 10, 0.1);
+        double res = calc.calculate(0, 1000, 0.1);
+        System.out.println(res);
     }
 }
