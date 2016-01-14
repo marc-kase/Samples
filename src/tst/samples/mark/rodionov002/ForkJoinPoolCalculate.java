@@ -1,9 +1,7 @@
 package tst.samples.mark.rodionov002;
 
 import java.util.concurrent.ForkJoinPool;
-
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
+import java.util.function.Function;
 
 /**
  * Created by MM on 09.01.2016.
@@ -27,7 +25,7 @@ public class ForkJoinPoolCalculate {
     public double compute() {
         ForkJoinPool forkJoinPool = new ForkJoinPool();
         ForkJoinCalculate calc = new ForkJoinCalculate(start, end, step, sequentialThreashold,
-                x -> (sin(x) * sin(x) + cos(x) * cos(x)));
+                func::apply);
         return forkJoinPool.invoke(calc);
     }
 }

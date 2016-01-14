@@ -1,8 +1,10 @@
 package tst.samples.mark.rodionov002;
 
 import java.util.concurrent.RecursiveTask;
+import java.util.function.Function;
 
-import static java.lang.Math.*;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 
 /**
  * Created by MM on 09.01.2016.
@@ -29,7 +31,7 @@ public class ForkJoinCalculate extends RecursiveTask<Double> {
         double x = start;
         while (x < end) {
             result +=
-                    step * func.apply(x);
+                    func.apply(x);
             x += step;
         }
         return result;

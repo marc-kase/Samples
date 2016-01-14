@@ -1,6 +1,9 @@
 package tst.samples.mark.rodionov002;
 
-import static java.lang.Math.*;
+import java.util.function.Function;
+
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 
 /**
  * Created by MM on 07.01.2016.
@@ -44,7 +47,7 @@ public class ThreadCalculate {
             double x = start;
             while (x < end) {
                 partialResult +=
-                        step * func.apply(x);
+                        func.apply(x);
                 x += step;
             }
         }

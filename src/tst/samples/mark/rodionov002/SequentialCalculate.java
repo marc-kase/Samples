@@ -1,6 +1,9 @@
 package tst.samples.mark.rodionov002;
 
-import static java.lang.Math.*;
+import java.util.function.Function;
+
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 
 
 public class SequentialCalculate {
@@ -15,7 +18,7 @@ public class SequentialCalculate {
         double x = start;
         while (x < end) {
             result +=
-                    step * func.apply(x);
+                    func.apply(x);
             x += step;
         }
         return result;
