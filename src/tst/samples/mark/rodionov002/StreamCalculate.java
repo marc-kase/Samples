@@ -26,7 +26,7 @@ public class StreamCalculate {
 
     public double sumParallel() {
         return DoubleStream.iterate(0.0, s -> s + step)
-                .limit((long) ((end - start) / step)) //todo Why step / 2 ?
+                .limit((long) ((end - start) / step))
                 .parallel()
 //                .map(sqFunc).reduce(0.0, Double::sum); //this is an equal notation
                 .map(sqFunc).sum();
@@ -34,7 +34,7 @@ public class StreamCalculate {
 
     public double sum() {
         return LongStream
-                .range(0, (long) ((end - start) / step)) //todo Why step / 2 ?
+                .range(0, (long) ((end - start) / step))
                 .parallel()
                 .mapToDouble(i -> start + step * i)
                 .map(sqFunc)
