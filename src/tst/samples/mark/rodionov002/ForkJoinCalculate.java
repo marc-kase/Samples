@@ -16,8 +16,6 @@ public class ForkJoinCalculate extends RecursiveTask<Double> {
     private final double sequentialThreashold;
     private final Function<Double, Double> func;
 
-//    private final long SEQUENTIAL_THREASHOLD = 2500;
-
     public ForkJoinCalculate(double start, double end, double step, double sequentialThreashold, Function<Double, Double> func) {
         this.start = start;
         this.end = end;
